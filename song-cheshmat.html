@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>cheshmat_محسن دولت</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Vazir", sans-serif;
+  background: #f9f9f9;
+  color: #003c46;
+  text-align: center;
+}
+header {
+  background: #00eaff;
+  color: #003c46;
+  padding: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  box-shadow: 0 0 15px #00eaffaa;
+}
+.cover {
+  width: 90%;
+  max-width: 500px;
+  border-radius: 14px;
+  margin: 25px auto;
+  box-shadow: 0 0 20px rgba(0,234,255,0.3);
+}
+.section {
+  background: #fffaf5;
+  border-radius: 16px;
+  margin: 20px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 15px rgba(0,234,255,0.15);
+}
+audio {
+  width: 100%;
+  margin-top: 10px;
+}
+canvas {
+  width: 100%;
+  height: 120px;
+  background: #e0f7fa;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #00eaff;
+  color: #003c46;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 10px 5px;
+  box-shadow: 0 0 10px #00eaff55;
+}
+.lyrics {
+  background: #f0f0ff; /* شفافیت بالا */
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  font-family: 'Vazirmatn', sans-serif;
+  color: #fff;
+  backdrop-filter: blur(20px) saturate(180%) brightness(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6); /* نئون نارنجی */
+}
+
+.lyrics h2 {
+  color: #ffae42;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+}
+
+.lyrics p {
+  line-height: 1.9;
+  font-size: 17px;
+  color: #000000;
+}
+
+/* افکت نئون نارنجی دور کاور آهنگ */
+.cover {
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(255, 140, 0, 0.9);
+  transition: box-shadow 0.3s ease;
+}
+.cover:hover {
+  box-shadow: 0 0 60px rgba(255, 180, 0, 1);
+}
+
+/* افکت نئون دور کاور آهنگ */
+.cover {
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255, 140, 0, 0.8);
+  transition: box-shadow 0.3s ease;
+}
+.cover:hover {
+  box-shadow: 0 0 45px rgba(255, 180, 0, 1);
+}
+.canvas {
+  width: 100%;
+  height: 120px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6); /* نئون نارنجی */
+  margin-top: 15px;
+  transition: 0.3s ease;
+}
+
+.canvas:hover {
+  box-shadow: 0 0 40px rgba(255, 180, 0, 1);
+}
+</style>
+</head>
+
+<body>
+
+<header>چشمات _mohsen 20Dolat</header>
+
+<img class="cover" src="https://s9.uupload.ir/files/amirhtml/photos/artworks-TPuhZ7AIlVG6XeY3-KLbW9w-t500x500.jpg">
+
+<div class="section">
+  <h2>متن و دانلود آهنگ چشمات از محسن دولت</h2>
+
+  <canvas id="visual3" class="canvas"></canvas>
+  <section class="lyrics">
+  <h2>🎵 متن ترانه</h2>
+  <p>
+    هرچی کشیدم عمری از اون چشای نازت<br>
+    چشات خدای احساس چشام خدای رازه<br>
+    کاشکی چشات با چشام یه ذره مهربون بود<br>
+    چشات واسه یه لحظه چراغ خونمون بود<br>
+    داغته کاش نداری، رو قلب خسته عمری<br><br>
+    محبوب من اینجوری که دل سپرده میشه<br>
+    از هر طرف عشق تو قلبم رو دوره کرده<br>
+    هیچی تو قلب خستم عشق تو کم نکرده
+  <br>دنیا هجوم درده عشق تو تکیه گامه</p>
+</section>
+
+<audio id="audio3" controls>
+  <source src="https://s13.uupload.ir/files/amirhtml/music/Mohsen%20Dolat%20-%20Cheshmat.mp3?play">
+</audio>
+  <canvas id="visual3" class="canvas"></canvas>
+  <a class="btn" href="index.html">بازگشت</a>
+  <a class="btn" href="https://s13.uupload.ir/files/amirhtml/music/Mohsen%20Dolat%20-%20Cheshmat.mp3" download>دانلود</a>
+
+  <div class="lyrics">
+  <p>🎧 آهنگ احساسی و عاشقانه از محسن دولت</p>
+</div>
+<script>
+// موج‌نما فعال
+function createVisualizer(audioId, canvasId) {
+  const audio = document.getElementById(audioId);
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext("2d");
+
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = new AudioCtx();
+
+  const src = audioCtx.createMediaElementSource(audio);
+  const analyser = audioCtx.createAnalyser();
+
+  src.connect(analyser);
+  analyser.connect(audioCtx.destination);
+
+  analyser.fftSize = 256;
+  const bufferLength = analyser.frequencyBinCount;
+  const dataArray = new Uint8Array(bufferLength);
+
+  function draw() {
+    requestAnimationFrame(draw);
+    analyser.getByteFrequencyData(dataArray);
+
+    const width = canvas.width;
+    const height = canvas.height;
+
+    ctx.clearRect(0, 0, width, height);
+
+    const barWidth = (width / bufferLength) * 2.5;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+      const barHeight = dataArray[i] / 1.8;
+      const hue = i * 3;
+
+      ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
+      ctx.fillRect(x, height - barHeight, barWidth, barHeight);
+
+      x += barWidth + 1;
+    }
+  }
+
+  function resize() {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  audio.onplay = () => {
+    audioCtx.resume();
+    draw();
+  };
+}
+
+// فراخوانی با شناسه‌های درست
+createVisualizer("audio3", "visual3");
+</script>
+</body>
+</html>

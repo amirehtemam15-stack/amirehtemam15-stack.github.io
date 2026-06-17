@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>🎙️ AM IR 🎶 Studio</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Vazir", sans-serif;
+  background: #eef7f8;
+  color: #003c46;
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  background: #aa00ff;
+  color: #fff;
+  text-align: center;
+  padding: 18px;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 0 30px #aa0000;
+  position: relative;
+  z-index: 10;
+}
+
+/* Menu Button */
+#menuBtn {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 3000;
+  background: #0ffa00;
+  color: #003c46;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 30px #aa0000;
+}
+
+/* Drawer */
+#drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  max-width: 320px;
+  height: 100%;
+  background: rgba(15, 250, 0, 0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 255, 128, 0.6);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 20px 16px;
+  box-sizing: border-box;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 2000;
+}
+#drawer.open { transform: translateX(0); }
+
+.menu-item {
+  display: block;
+  margin: 18px 0;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Overlay */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s ease;
+  z-index: 1400;
+}
+#overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Pages */
+.page {
+  display: none;
+  padding: 20px;
+}
+#home { display: block; }
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  margin: 25px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 20px rgba(0,234,255,0.15);
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  color: #00bcd4;
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.card p {
+  opacity: 0.85;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+audio, video {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #aff66f;
+  color: #003c46;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 16px;
+  box-shadow: 0 0 10px #00eaff55;
+}
+
+/* Video List */
+.video-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.video-item {
+  padding: 12px;
+  background: rgba(0, 255, 128, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.video-item:hover {
+  background: rgba(0, 255, 128, 0.3);
+  box-shadow: 0 0 15px #00ffcc;
+}
+
+/* Photo Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.photo-card {
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #00eaff55;
+  text-align: center;
+}
+
+.photo-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.photo-card p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>🎙️ AM IR 🎶 Studio</header>
+
+<div id="menuBtn">☰</div>
+<div id="overlay"></div>
+
+<div id="drawer">
+  <div class="menu-item" data-target="home">خانه</div>
+  <div class="menu-item" data-target="music">آهنگ‌ها</div>
+  <div class="menu-item" data-target="new-music">آهنگ‌های جدید</div>
+<div class="menu-item" data-target="old-music">آهنگ‌های قدیمی</div>
+<div class="menu-item" data-target="remix">ریمیکس‌ها</div>
+  <div class="menu-item" data-target="videos">ویدیوها</div>
+  <div class="menu-item" data-target="photos">تصاویر</div>
+  <div class="menu-item" data-target="contact">تماس</div>
+</div>
+
+<!-- HOME -->
+<section id="home" class="page">
+  <h2>به AM IR Studio خوش آمدی</h2>
+  <p>اینجا همه‌چیز از موسیقی تا ویدیو و تصاویر شخصی تو یک‌جا جمع شده.</p>
+</section>
+
+<!-- MUSIC -->
+<section id="new-music" class="page">
+  <h2>🎧 آهنگ‌های جدید</h2>
+
+  <div class="card">
+    <img src="covers/new1.jpg">
+    <h3>نام آهنگ جدید ۱</h3>
+    <audio controls>
+      <source src="music/new1.mp3">
+    </audio>
+    <a class="btn" href="#">دانلود</a>
+  </div>
+
+  <div class="card">
+    <img src="covers/new2.jpg">
+    <h3>نام آهنگ جدید ۲</h3>
+    <audio controls>
+      <source src="music/new2.mp3">
+    </audio>
+    <a class="btn" href="#">دانلود</a>
+  </div>
+
+</section>
+<section id="old-music" class="page">
+  <h2>🎙️ آهنگ‌های قدیمی</h2>
+
+  <div class="card">
+    <img src="covers/old1.jpg">
+    <h3>آهنگ قدیمی ۱</h3>
+    <audio controls>
+      <source src="music/old1.mp3">
+    </audio>
+    <a class="btn" href="#">دانلود</a>
+  </div>
+
+  <div class="card">
+    <img src="covers/old2.jpg">
+    <h3>آهنگ قدیمی ۲</h3>
+    <audio controls>
+      <source src="music/old2.mp3">
+    </audio>
+    <a class="btn" href="#">دانلود</a>
+  </div>
+
+</section>
+<section id="remix" class="page">
+  <h2>🎛️ ریمیکس‌ها</h2>
+
+  <div class="card">
+    <img src="covers/remix1.jpg">
+    <h3>ریمیکس ۱</h3>
+    <audio controls>
+      <source src="music/remix1.mp3">
+    </audio>
+    <a class="btn" href="#">دانلود</a>
+  </div>
+
+  <div class="card">
+    <img src="covers/remix2.jpg">
+    <h3>ریمیکس ۲</h3>
+    <audio controls>
+      <source src="music/remix2.mp3">
+    </audio>
+    <a class="btn" href="#">دانلود</a>
+  </div>
+
+</section>
+<section id="music" class="page">
+  
+
+  <!-- آهنگ نیه -->
+    <div class="card">
+     <img src="https://s41.uupload.ir/files/amirhtml/niye-sura-iskenderli-1-min-e1608300441421.jpeg">
+    <h3>نیه – Sura İskenderli</h3>
+    <p>متن و ترجمه کامل داخل صفحه آهنگ</p>
+
+    <audio controls>
+      <source src="https://s25.uupload.ir/files/amirhtml/music/Sura%20İskenderli%20-%20Niye.mp3">
+    </audio>
+
+    <a class="btn" href="song-niye.html">مشاهده صفحه آهنگ</a>
+    <a class="btn" href="https://s25.uupload.ir/files/amirhtml/music/Sura%20İskenderli%20-%20Niye.mp3" download>دانلود</a>
+  </div>
+
+  <!-- آهنگ مجلسمیز -->
+  <div class="card">
+    <img src="https://s31.uupload.ir/files/amirhtml/۲۰۲۶۰۶۱۵_۱۶۵۹۴۶.jpg">
+    <h3>مجلسمیز خودمانیدیر</h3>
+
+    <audio controls>
+      <source src="https://s41.uupload.ir/files/amirhtml/music/Majlisimiz%20Xodemanidi.mp3">
+    </audio>
+
+    <a class="btn" href="song-majlis.html">مشاهده صفحه آهنگ</a>
+    <a class="btn" href="https://s41.uupload.ir/files/amirhtml/music/Majlisimiz%20Xodemanidi.mp3" download>دانلود</a>
+  </div>
+
+  <!--آهنگ چشمات -->
+    <div class="card">
+     <img src="https://s9.uupload.ir/files/amirhtml/photos/artworks-TPuhZ7AIlVG6XeY3-KLbW9w-t500x500.jpg">
+    <h3>چشمات _ محسن‌دولت</h3>
+    <p>متن و ترجمه کامل داخل صفحه آهنگ</p>
+
+    <audio controls>
+      <source src="https://s9.uupload.ir/files/amirhtml/music/Mohsen%20Dolat%20-%20Cheshmat.mp3?play">
+    </audio>
+
+    <a class="btn" href="song-cheshmat.html">مشاهده صفحه آهنگ</a>
+    <a class="btn" href="https://s9.uupload.ir/files/amirhtml/music/Mohsen%20Dolat%20-%20Cheshmat.mp3" download>دانلود</a>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos" class="page">
+  <h2>🎬 ویدیوها</h2>
+
+  <video id="videoPlayer" controls playsinline>
+    <source id="videoSource" src="https://upload.ir/amir/video1.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-list">
+    <div class="video-item" data-src="https://upload.ir/amir/video1.mp4">ویدیو 1</div>
+    <div class="video-item" data-src="https://upload.ir/amir/video2.mp4">ویدیو 2</div>
+    <div class="video-item" data-src="https://upload.ir/amir/video3.mp4">ویدیو 3</div>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section id="photos" class="page">
+  <h2>📸 تصاویر</h2>
+
+  <div class="gallery">
+
+    <div class="photo-card">
+      <img src="https://s25.uupload.ir/files/amirhtml/photos/p1.jpg" onclick="downloadImage(this.src)">
+      <p>بیو برای تصویر شماره ۱</p>
+    </div>
+
+    <div class="photo-card">
+      <img src="https://s25.uupload.ir/files/amirhtml/photos/p2.jpg" onclick="downloadImage(this.src)">
+      <p>بیو برای تصویر شماره ۲</p>
+    </div>
+
+    <div class="photo-card">
+      <img src="https://s25.uupload.ir/files/amirhtml/photos/p3.jpg" onclick="downloadImage(this.src)">
+      <p>بیو برای تصویر شماره ۳</p>
+    </div>
+
+    <div class="photo-card">
+      <img src="https://s25.uupload.ir/files/amirhtml/photos/p4.jpg" onclick="downloadImage(this.src)">
+      <p>بیو برای تصویر شماره ۴</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="page">
+  <h2>📞 تماس با من</h2>
+
+  <p>شماره تماس: <b>09300438660</b></p>
+  <p>تلگرام: <a href="https://t.me/amir_html">@amir_html</a></p>
+</section>
+<script>
+// Drawer toggle
+const btn = document.getElementById("menuBtn");
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
+
+btn.onclick = () => {
+  drawer.classList.add("open");
+  overlay.classList.add("show");
+};
+
+overlay.onclick = () => {
+  drawer.classList.remove("open");
+  overlay.classList.remove("show");
+};
+
+// Page switching
+document.querySelectorAll(".menu-item").forEach(item => {
+  item.onclick = () => {
+    const target = item.getAttribute("data-target");
+
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById(target).style.display = "block";
+
+    drawer.classList.remove("open");
+    overlay.classList.remove("show");
+  };
+});
+
+// Video switching
+const videoPlayer = document.getElementById("videoPlayer");
+const videoSource = document.getElementById("videoSource");
+document.querySelectorAll(".video-item").forEach(item => {
+  item.onclick = () => {
+    videoSource.src = item.getAttribute("data-src");
+    videoPlayer.load();
+    videoPlayer.play();
+  };
+});
+
+// Download image
+function downloadImage(url) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "image.jpg";
+  a.click();
+}
+</script>
+</body>
+</html>
